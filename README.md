@@ -100,30 +100,3 @@ and the HUD. Full-screen clears occur only on screen transitions. VRAM offsets
 use `rowOff` and shifts; the LCG also uses shift/add arithmetic. No custom
 interrupt handlers are installed, so no interrupt-vector restoration is needed.
 
-## Automated verification
-
-With Python 3, NASM, and DOSBox available:
-
-```sh
-python3 tests/verify.py
-```
-
-The script builds a temporary COM harness from the actual game source and runs
-it in headless DOSBox. It checks VRAM coordinates and glyphs, selective erasure,
-LCG output, swept collision boundaries, simultaneous hits, two-frame red flash,
-score/level transitions, saturation, movement clamps, title/start, game over,
-restart, ESC input, and a real BIOS timer tick wait. Temporary files are removed.
-This verifies routines in DOSBox; visual smoothness and keyboard feel still
-benefit from an interactive play session.
-
-## Build the report
-
-The Vietnamese report source is in `latex/main.tex`; its body is maintained in
-`latex/report_body.tex`. Build it with pdfLaTeX through latexmk:
-
-```sh
-cd latex
-latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-```
-
-The compiled document is `latex/main.pdf`.
